@@ -10,9 +10,14 @@ import "@/styles/globals.css";
 
 import Attribution from "@/components/attribution";
 
-import { Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const spaceGrotesk = Space_Grotesk({
+  weight: ["500"],
+  style: ["normal"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata = {
   title: "Frontend Mentor | Interactive card details form",
@@ -22,7 +27,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={spaceGrotesk.className}>
         {children}
         <Attribution />
       </body>
