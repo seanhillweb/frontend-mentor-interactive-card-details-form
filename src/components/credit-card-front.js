@@ -1,7 +1,7 @@
 import Image from "next/image";
 import creditCardFront from "@/public/bg-card-front.png";
 import creditCardLogo from "@/public/card-logo.svg";
-import formatCreditCardNumber from "@/utils/format-cred-card-number";
+import formatCreditCardNumber from "@/utils/format-credit-card-number";
 
 export default function CreditCardFront({
   cardName,

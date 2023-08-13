@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import formatCreditCardNumber from "@/utils/format-cred-card-number";
+import formatCreditCardNumber from "@/utils/format-credit-card-number";
 
 export default function Form({ values, onChange }) {
   const validationSchema = yup.object({
