@@ -1,16 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import formatCreditCardNumber from "@/utils/format-cred-card-number";
-import { creditCardValues } from "@/data/credit-card";
 
-export default function Form() {
-  const [values, setValues] = useState(creditCardValues);
-
+export default function Form({ values, onChange }) {
   const validationSchema = yup.object({
     cardName: yup.string().required("Required"),
     cardNumber: yup
@@ -36,11 +33,11 @@ export default function Form() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 lg:gap-8 my-12 lg:my-0">
       <div className="flex flex-col">
         <label
           htmlFor="cardName"
-          className="text-sm text-brand-violet-300 uppercase tracking-widest mb-2"
+          className="text-xs lg:text-sm text-brand-violet-300 uppercase tracking-widest mb-2"
         >
           Cardholder Name
         </label>
@@ -57,7 +54,7 @@ export default function Form() {
           {...register("cardName", {
             required: true,
             onChange: (e) =>
-              setValues({
+              onChange({
                 ...values,
                 cardName: e.target.value,
               }),
@@ -76,14 +73,14 @@ export default function Form() {
       <div className="flex flex-col">
         <label
           htmlFor="cardNumber"
-          className="text-sm text-brand-violet-300 uppercase tracking-widest mb-2"
+          className="text-xs lg:text-sm text-brand-violet-300 uppercase tracking-widest mb-2"
         >
           Card Number
         </label>
         <input
           id="cardNumber"
           name="cardNumber"
-          defaultValue={formatCreditCardNumber(values.cardNumber)}
+          // value={formatCreditCardNumber(values.cardNumber)}
           placeholder="e.g. 1234 5678 9123 0000"
           type="tel"
           inputMode="numeric"
@@ -95,11 +92,10 @@ export default function Form() {
           aria-invalid={errors.cardNumber ? "true" : "false"}
           {...register("cardNumber", {
             required: true,
-            minLength: 16,
-            maxLength: 16,
             valueAsNumber: true,
+            maxLength: 16,
             onChange: (e) =>
-              setValues({
+              onChange({
                 ...values,
                 cardNumber: e.target.value,
               }),
@@ -115,18 +111,78 @@ export default function Form() {
           )}
         />
       </div>
-      <div className="flex flex-row">
+      <div className="grid grid-cols-2 gap-4 lg:gap-8">
+        <fieldset>
+          <legend className="text-xs lg:text-sm text-brand-violet-300 uppercase tracking-widest mb-2">
+            Exp. Date (MM/YY)
+          </legend>
+          <div className="grid grid-cols-2 gap-2 lg:gap-4">
+            <div className="flex flex-col">
+              <label htmlFor="cardExpMonth" className="sr-only">
+                Expiration Month
+              </label>
+              <input
+                id="cardExpMonth"
+                name="cardExpMonth"
+                placeholder="MM"
+                type="tel"
+                inputMode="numeric"
+                className={`rounded-lg p-3 focus:ring-transparent ${
+                  errors.cardExpMonth
+                    ? "border-brand-red hover:border-brand-red focus:border-brand-red"
+                    : "border-brand-violet-100 hover:border-brand-gradient-end focus:border-brand-gradient-end"
+                }`}
+                aria-invalid={errors.cardExpMonth ? "true" : "false"}
+                {...register("cardExpMonth", {
+                  required: true,
+                  valueAsNumber: true,
+                  onChange: (e) =>
+                    onChange({
+                      ...values,
+                      cardExpMonth: e.target.value,
+                    }),
+                })}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="cardExpYear" className="sr-only">
+                Expiration Year
+              </label>
+              <input
+                id="cardExpYear"
+                name="cardExpYear"
+                placeholder="YY"
+                type="tel"
+                inputMode="numeric"
+                className={`rounded-lg p-3 focus:ring-transparent ${
+                  errors.cardExpYear
+                    ? "border-brand-red hover:border-brand-red focus:border-brand-red"
+                    : "border-brand-violet-100 hover:border-brand-gradient-end focus:border-brand-gradient-end"
+                }`}
+                aria-invalid={errors.cardExpYear ? "true" : "false"}
+                {...register("cardExpYear", {
+                  required: true,
+                  valueAsNumber: true,
+                  onChange: (e) =>
+                    onChange({
+                      ...values,
+                      cardExpYear: e.target.value,
+                    }),
+                })}
+              />
+            </div>
+          </div>
+        </fieldset>
         <div className="flex flex-col">
           <label
             htmlFor="cardCVC"
-            className="text-sm text-brand-violet-300 uppercase tracking-widest mb-2"
+            className="text-xs lg:text-sm text-brand-violet-300 uppercase tracking-widest mb-2"
           >
             CVC
           </label>
           <input
             id="cardCVC"
             name="cardCVC"
-            defaultValue={values.cardCVC}
             placeholder="e.g. 123"
             type="tel"
             inputMode="numeric"
@@ -138,11 +194,9 @@ export default function Form() {
             aria-invalid={errors.cardCVC ? "true" : "false"}
             {...register("cardCVC", {
               required: true,
-              minLength: 16,
-              maxLength: 16,
               valueAsNumber: true,
               onChange: (e) =>
-                setValues({
+                onChange({
                   ...values,
                   cardCVC: e.target.value,
                 }),
@@ -162,7 +216,7 @@ export default function Form() {
       <input
         type="submit"
         value="Confirm"
-        className="text-white bg-brand-violet-300 p-4 rounded-xl hover:cursor-pointer"
+        className="text-white bg-brand-violet-300 px-4 py-3 rounded-lg hover:cursor-pointer mt-2 md:mt-4"
       />
     </form>
   );
