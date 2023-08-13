@@ -7,7 +7,6 @@
  *
  * @link https://react.dev/learn/updating-arrays-in-state
  * @link https://dev.to/deboragaleano/how-to-handle-multiple-inputs-in-react-55el
- * @link https://dev.to/franciscomendes10866/react-form-validation-with-react-hook-form-and-yup-4a98
  * @link https://medium.com/hootsuite-engineering/a-comprehensive-guide-to-validating-and-formatting-credit-cards-b9fa63ec7863
  */
 
