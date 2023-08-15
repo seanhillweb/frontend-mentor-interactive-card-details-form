@@ -34,7 +34,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [View on Netlify](https://fem-newsletter-signup-seanhillweb.netlify.app/)
+- Solution URL: [View on Netlify](https://fem-card-details-form-seanhillweb.netlify.app/)
 - Project URL: [View on Github](https://github.com/seanhillweb/frontend-mentor-interactive-card-details-form)
 
 ## My process
